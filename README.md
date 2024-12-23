@@ -13,17 +13,17 @@ NOTE: EVERYTHING in this tutorial is needed in order to complete the installatio
 \___ \ / _ \/ __| __| |/ _ \| '_ \ 
  ___) |  __| (__| |_| | (_) | | | |
 |____/ \___|\___|\__|_|\___/|_| |_|
-Firstly, set your keylayout. If you have a us keylayout, just copy the following command
-# loadkeys us
+# Firstly, set your keylayout. If you have a us keylayout, just copy the following command
+loadkeys us
 
-Next start to connect to wifi with the following command (for more info: https://wiki.archlinux.org/title/Iwd)
-# iwctl
+# Next start to connect to wifi with the following command (for more info: https://wiki.archlinux.org/title/Iwd)
+iwctl
 
-Confirm the connection by pinging any website, for ex: 
-# ping google.com
+# Confirm the connection by pinging any website, for ex: 
+code ping google.com
 
-Check partitions
-# lsblk
+# Check partitions
+lsblk
 
 
 
