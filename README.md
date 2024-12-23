@@ -7,15 +7,14 @@ NOTE: EVERYTHING in this tutorial is needed in order to complete the installatio
 
 # Manual Section
 Firstly, set your keylayout. If you have a us keylayout, just copy the following command
-<div style="border: 2px solid #007bff; border-radius: 15px; padding: 10px; background-color: #f0f8ff; max-width: 300px; margin: 10px auto;">
-  This is a bubble-like effect created using inline HTML and CSS.
-</div>
-
+```bash
+loadkeys us
+```
 Next start to connect to wifi with the following command (for more info: https://wiki.archlinux.org/title/Iwd)
 * iwctl
 
 Confirm the connection by pinging any website, for ex: 
-code ping google.com
+* ping google.com
 
 Check partitions
 ### lsblk
