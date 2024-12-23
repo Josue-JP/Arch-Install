@@ -3,22 +3,9 @@ Download Arch on a Bios machine with encryption with this script.
 You will have to do some manual configuration first, and then proceed with the script installation, as this first part is a little more personal to your own situation
 NOTE: EVERYTHING in this tutorial is needed in order to complete the installation.
 
-
-                                                                                                                                                           
-          ____                                                                                                                                             
-        ,'  , `.                                                    ,--,             .--.--.                          ___                                  
-     ,-+-,.' _ |                                                  ,--.'|            /  /    '.                      ,--.'|_    ,--,                        
-  ,-+-. ;   , ||                  ,---,          ,--,             |  | :           |  :  /`. /                      |  | :,' ,--.'|    ,---.        ,---,  
- ,--.'|'   |  ;|              ,-+-. /  |       ,'_ /|             :  : '           ;  |  |--`                       :  : ' : |  |,    '   ,'\   ,-+-. /  | 
-|   |  ,', |  ':  ,--.--.    ,--.'|'   |  .--. |  | :    ,--.--.  |  ' |           |  :  ;_       ,---.     ,---. .;__,'  /  `--'_   /   /   | ,--.'|'   | 
-|   | /  | |  || /       \  |   |  ,"' |,'_ /| :  . |   /       \ '  | |            \  \    `.   /     \   /     \|  |   |   ,' ,'| .   ; ,. :|   |  ,"' | 
-'   | :  | :  |,.--.  .-. | |   | /  | ||  ' | |  . .  .--.  .-. ||  | :             `----.   \ /    /  | /    / ':__,'| :   '  | | '   | |: :|   | /  | | 
-;   . |  ; |--'  \__\/: . . |   | |  | ||  | ' |  | |   \__\/: . .'  : |__           __ \  \  |.    ' / |.    ' /   '  : |__ |  | : '   | .; :|   | |  | | 
-|   : |  | ,     ," .--.; | |   | |  |/ :  | : ;  ; |   ," .--.; ||  | '.'|         /  /`--'  /'   ;   /|'   ; :__  |  | '.'|'  : |_|   :    ||   | |  |/  
-|   : '  |/     /  /  ,.  | |   | |--'  '  :  `--'   \ /  /  ,.  |;  :    ;        '--'.     / '   |  / |'   | '.'| ;  :    ;|  | '.'\   \  / |   | |--'   
-;   | |`-'     ;  :   .'   \|   |/      :  ,      .-./;  :   .'   \  ,   /           `--'---'  |   :    ||   :    : |  ,   / ;  :    ;`----'  |   |/       
-|   ;/         |  ,     .-./'---'        `--`----'    |  ,     .-./---`-'                       \   \  /  \   \  /   ---`-'  |  ,   /         '---'        
-'---'           `--`---'                               `--`---'                                  `----'    `----'             ---`-'                       
+ _ _    _
+| | |  /_\
+| | | /   \
 #Manual Section
 Firstly, set your keylayout. If you have a us keylayout, just copy the following command
 * loadkeys us
