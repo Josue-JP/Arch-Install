@@ -4,7 +4,7 @@ You will have to do some manual configuration first, and then proceed with the s
 NOTE: EVERYTHING in this tutorial is needed in order to complete the installation.
 
 
- __  __                         _  
+# __  __                         _  
 |  \/  | __ _ _ __  _   _  __ _| | 
 | |\/| |/ _` | '_ \| | | |/ _` | | 
 | |  | | (_| | | | | |_| | (_| | | 
@@ -14,17 +14,17 @@ NOTE: EVERYTHING in this tutorial is needed in order to complete the installatio
  ___) |  __| (__| |_| | (_) | | | |
 |____/ \___|\___|\__|_|\___/|_| |_|
 
-# Firstly, set your keylayout. If you have a us keylayout, just copy the following command
-` loadkeys us
+Firstly, set your keylayout. If you have a us keylayout, just copy the following command
+* loadkeys us
 
-# Next start to connect to wifi with the following command (for more info: https://wiki.archlinux.org/title/Iwd)
-iwctl
+Next start to connect to wifi with the following command (for more info: https://wiki.archlinux.org/title/Iwd)
+* iwctl
 
-# Confirm the connection by pinging any website, for ex: 
-code ping google.com
+Confirm the connection by pinging any website, for ex: 
+* code ping google.com
 
-# Check partitions
-lsblk
+Check partitions
+* lsblk
 
 
 
