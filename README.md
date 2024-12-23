@@ -4,7 +4,7 @@ You will have to do some manual configuration first, and then proceed with the s
 NOTE: EVERYTHING in this tutorial is needed in order to complete the installation.
 
 
-# __  __                         _  
+ __  __                         _  
 |  \/  | __ _ _ __  _   _  __ _| | 
 | |\/| |/ _` | '_ \| | | |/ _` | | 
 | |  | | (_| | | | | |_| | (_| | | 
