@@ -13,10 +13,10 @@ Next start to connect to wifi with the following command (for more info: https:/
 * iwctl
 
 Confirm the connection by pinging any website, for ex: 
-* code ping google.com
+code ping google.com
 
 Check partitions
-* lsblk
+### lsblk
 
 
 
