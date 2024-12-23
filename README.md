@@ -7,7 +7,7 @@ NOTE: EVERYTHING in this tutorial is needed in order to complete the installatio
 
 # Manual Section
 Firstly, set your keylayout. If you have a us keylayout, just copy the following command
-## loadkeys us
+### loadkeys us
 
 Next start to connect to wifi with the following command (for more info: https://wiki.archlinux.org/title/Iwd)
 * iwctl
