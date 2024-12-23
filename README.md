@@ -4,14 +4,9 @@ You will have to do some manual configuration first, and then proceed with the s
 NOTE: EVERYTHING in this tutorial is needed in order to complete the installation.
 
 
-███    ███  █████  ███    ██ ██    ██  █████  ██          ███████ ███████  ██████ ████████ ██  ██████  ███    ██ 
-████  ████ ██   ██ ████   ██ ██    ██ ██   ██ ██          ██      ██      ██         ██    ██ ██    ██ ████   ██ 
-██ ████ ██ ███████ ██ ██  ██ ██    ██ ███████ ██          ███████ █████   ██         ██    ██ ██    ██ ██ ██  ██ 
-██  ██  ██ ██   ██ ██  ██ ██ ██    ██ ██   ██ ██               ██ ██      ██         ██    ██ ██    ██ ██  ██ ██ 
-██      ██ ██   ██ ██   ████  ██████  ██   ██ ███████     ███████ ███████  ██████    ██    ██  ██████  ██   ████ 
-                                                                                                                 
-                                                                                                                    
-
+┳┳┓        ┓  ┏┓    •    
+┃┃┃┏┓┏┓┓┏┏┓┃  ┗┓┏┓┏╋┓┏┓┏┓
+┛ ┗┗┻┛┗┗┻┗┻┗  ┗┛┗ ┗┗┗┗┛┛┗
   MANUAL-SECTION
 Firstly, set your keylayout. If you have a us keylayout, just copy the following command
 # loadkeys us
