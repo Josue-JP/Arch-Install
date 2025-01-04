@@ -30,6 +30,5 @@ cfdisk /dev/sdb
 ```
 *I will be partitioning "sdb" but for you it might be "mmcblk0", "sdX" or "nvme0n1"*
 
--1
-- 2
-
+## text 
+### text
