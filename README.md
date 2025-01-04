@@ -33,6 +33,6 @@ cfdisk /dev/sdb
 - EFI  *Size: 1G, Type: EFISystem, This is the bootloader partition*
 - ROOT *Size: 30G+, Type: Linux filesystem, This is the actual OS*
 - SWAP *Size: 8G+, Type: Linux swap, This is the virtual RAM*
-##### Write the changes and quit
+Write the changes and quit
 
 
