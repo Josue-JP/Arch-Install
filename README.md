@@ -25,6 +25,8 @@ lsblk
 ```
 
 
+
+
 Then run the cfdisk command and the disk you will be partitioning.
 (make sure you put the /dev/ and then the disk)
 ```bash
