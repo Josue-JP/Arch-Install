@@ -93,7 +93,7 @@ UUID=8fada6ed-545a-4021-9c21-c3c9b847593e
 That is an example of what the two UUID's will look like at the bottom. Remember that the top UUID is the encrypted device, and that the bot    tom one is the decrypted device 
 
 Step 2 - copy the
-Step 3 -
+**Step** 3 -
 
 
 
