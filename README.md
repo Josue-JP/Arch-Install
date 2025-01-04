@@ -23,10 +23,6 @@ Firstly, check all the disks on your pc/laptop, and choose the disk that you wan
 ```bash
 lsblk
 ```
-
-
-
-
 Then run the cfdisk command and the disk you will be partitioning.
 (make sure you put the /dev/ and then the disk)
 ```bash
