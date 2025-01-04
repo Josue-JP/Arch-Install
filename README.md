@@ -1,7 +1,7 @@
   ARCH-INSTALL
 
-Download Arch on a UEFI machine with encryption using this guide.
-You do need to do some manual configuration first as the arch installation is a little more personal to your own situation.
+Download Arch on a UEFI machine with encryption while dual booting using this guide.
+You do need to do manual configuration as the arch installation is personal to your situation.
 
 
 # Intro
@@ -24,11 +24,11 @@ Firstly, check all the disks on your pc/laptop, and choose the disk that you wan
 lsblk
 ```
 
+
 Then run the cfdisk command and the disk you will be partitioning.
+(make sure you put the /dev/ and then the disk)
 ```bash
 cfdisk /dev/sdb
 ```
-(make sure you put the /dev/ and then the disk)
-
 *I will be partitioning "sdb" but for you it might be "mmcblk0", "sdX" or "nvme0n1"*
 
