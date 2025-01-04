@@ -30,9 +30,9 @@ cfdisk /dev/sdb
 ```
 *I will be partitioning "sdb" but for you it might be "mmcblk0", "sdX" or "nvme0n1"*
 ### The Three partitions
-- EFI    Size: 1G, Type: EFISystem, This is the bootloader partition
-- ROOT    Size: 30G+, Type: Linux filesystem, This is the actual OS
-- SWAP    Size: 8G+, Type: Linux swap, This is the virtual RAM
+- EFI - Size: 1G, Type: EFISystem, This is the bootloader partition
+- ROOT - Size: 30G+, Type: Linux filesystem, This is the actual OS
+- SWAP - Size: 8G+, Type: Linux swap, This is the virtual RAM
 
 Write the changes and quit
 
