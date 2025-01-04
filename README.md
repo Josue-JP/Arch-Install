@@ -21,7 +21,7 @@ Check partitions
 ```bash
 lsblk
 ```
-<del>This is dimmed text</del>
+<s>This is dimmed text</s>
 
 
 
