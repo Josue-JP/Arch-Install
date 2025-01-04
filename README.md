@@ -36,4 +36,51 @@ cfdisk /dev/sdb
 
 Write the changes and quit
 
+# Format partitions
+### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition
+- EFI - For this partition type the following command:
+```bash
+mkfs.fat -F32 /dev/sdb3
+```
+- ROOT - For this partition the following must be done:
+Type and enter in a custom password for the encrypted partition
+```bash
+cryptsetup luksFormant /dev/sdb4
+```
+Create the decrypted partition inside of the encrypted partition.
+(you can change Croot to whatever you like (ex: cryptroot))
+```bash
+cryptsetup open /dev/sdb4 Croot
+```
+For the journaling-file-system ext4, run the following to format Croot:
+```bash
+mkfs.ext4 /dev/mapper/Croot
+```
+- SWAP - For this partition type the following command:
+```bash
+mkswap /dev/sdb5    
+```
+# Mounting
+### Type the following:
+```bash
+mount /dev/mapper/Croot /mnt
+```
+*^Croot is the decrypted partition^*
+```bash
+mkdir /mnt/boot
+```
+```bash
+mount /dev/sdb3 /mnt/boot
+```
+*^sdb3 is the bootloader partition^*
+```bash
+swapon /dev/sdb5
+```
+*^sdb5 is the swap partition^*
+
+
+
+
+
+
 
