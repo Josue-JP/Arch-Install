@@ -1,8 +1,7 @@
-
   ARCH-INSTALL
 
 Download Arch on a UEFI machine with encryption using this guide.
-You do need to do some manual configuration as the arch installation is a little more personal to your own situation.
+You do need to do some manual configuration first as the arch installation is a little more personal to your own situation.
 
 
 # Intro
@@ -30,6 +29,6 @@ Then run the cfdisk command and the disk you will be partitioning.
 cfdisk /dev/sdb
 ```
 (make sure you put the /dev/ and then the disk)
-*I will be partitioning "sdb" but for you it might be "mmcblk0", "sdX" or "nvme0n1"*
 
+*I will be partitioning "sdb" but for you it might be "mmcblk0", "sdX" or "nvme0n1"*
 
