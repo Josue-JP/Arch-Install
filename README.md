@@ -79,6 +79,22 @@ swapon /dev/sdb5
 ```
 *^sdb5 is the swap partition^*
 
+PLEASE PROCEED WITH CAUTION, AND BE SURE THAT WHAT YOU ARE DOING IS CORRECT. 
+  
+IF YOU ARE NOT SURE ON WHETHER YOU ARE DOING IT RIGHT, PLEASE LOOK UP THE ISSUE ON TRUSTED SOURCES
+   
+1 - In this file scroll down to the very bottom and look for the UUID of the encrypted and decrypted device
+   
+Ex: 
+ 
+UUID=4d8a927c-93b7-4bfa-a2b6-d9b497ff6a78
+ 
+UUID=8fada6ed-545a-4021-9c21-c3c9b847593e
+ 
+That is an example of what the two UUID's will look like at the bottom. Remember that the top UUID is the encrypted device, and that the bot    tom one is the decrypted device 
+ 
+2 - copy the 
+3 - 
 
 
 
