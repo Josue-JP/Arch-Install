@@ -37,7 +37,7 @@ cfdisk /dev/sdb
 Write the changes and quit
 
 # Format partitions
-##### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition
+#### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition
 - EFI - For this partition type the following command:
 ```bash
 mkfs.fat -F32 /dev/sdb3
