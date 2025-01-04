@@ -1,8 +1,8 @@
 
   ARCH-INSTALL
 
-Download Arch on a UEFI machine with encryption using this guide
-You do need to do some manual configuration first as the arch installation is a little more personal to your own situation.
+Download Arch on a UEFI machine with encryption using this guide.
+You do need to do some manual configuration as the arch installation is a little more personal to your own situation.
 
 
 # Intro
