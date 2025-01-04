@@ -1,11 +1,10 @@
   ARCH-INSTALL
 
-Download Arch on a UEFI machine with encryption using the scripts provided.
-You need to do some manual configuration first, and then proceed with the script installation, as this first part is a little more personal to your own situation.
-NOTE: EVERYTHING in this tutorial is needed in order to complete the installation.
+Download Arch on a UEFI machine with encryption using this guide
+You do need to do some manual configuration first as the arch installation is a little more personal to your own situation.
 
 
-# Manual Section
+# Section 1
 Firstly, set your keylayout. If you have a us keylayout, just copy the following command
 ```bash
 loadkeys us
@@ -22,6 +21,8 @@ Check partitions
 ```bash
 lsblk
 ```
+<!-- This is a comment -->
+
 
 
 
