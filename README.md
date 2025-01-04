@@ -43,6 +43,7 @@ Write the changes and quit
 mkfs.fat -F32 /dev/sdb3
 ```
 - ROOT - For this partition the following must be done:
+  
 Type and enter in a custom password for the encrypted partition
 ```bash
 cryptsetup luksFormant /dev/sdb4
