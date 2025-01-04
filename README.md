@@ -21,7 +21,7 @@ Check partitions
 ```bash
 lsblk
 ```
-<span style="color: gray;">This is dimmed text</span>
+<small>This is small text</small>
 
 
 
