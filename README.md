@@ -21,7 +21,7 @@ Check partitions
 ```bash
 lsblk
 ```
-<s>This is dimmed text</s>
+<span style="color: gray;">This is dimmed text</span>
 
 
 
