@@ -286,6 +286,7 @@ shutdown now
 #####################################################################
 #### WHILE THE COMPUTER IS IN SHUTDOWN MODE UNPLUG THE USB STICK
 #####################################################################
+
 After your computer shutsdown, you can now restart your pc/laptop.
 
 
