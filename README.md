@@ -174,7 +174,7 @@ To change the password for Root, run this command and enter a password:
 passwd
 ```
 ### Custom users
-*A Custom user is user for daily*
+*A Custom user is a daily used user*
 
 To allow the wheel group to have root privileges:
 ```bash
