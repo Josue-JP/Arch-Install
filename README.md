@@ -205,7 +205,7 @@ Install:
 ```bash
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 ```
-### Encryption with Grub
+#### Encryption with Grub
 Run this command to see the UUID of your encrypted partition:
 ```bash
 blkid -o value -s UUID /dev/sdb4
