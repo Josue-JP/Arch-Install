@@ -226,7 +226,6 @@ nano /etc/default/grub
 #### PLEASE PROCEED WITH CAUTION, AND BE SURE THAT WHAT YOU ARE DOING IS CORRECT 
 
 #### IF YOU ARE NOT SURE ON WHETHER YOU ARE DOING IT RIGHT, PLEASE LOOK UP THE ISSUE ON TRUSTED SOURCES
-
 #### FOR MORE DETAIL ABOUT THE NEXT PROCESS, REFER TO THE "GRUB Setup" SECTION OF THIS LINK (https://comfy.guide/client/luks/)
 
 Step 1 - In this file scroll down to the very bottom and look for the UUID of the encrypted and decrypted device
