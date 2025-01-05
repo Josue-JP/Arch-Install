@@ -46,7 +46,7 @@ cfdisk /dev/sdb
 - ROOT - Size: 30G+, Type: Linux filesystem, This is the actual OS
 - SWAP - Size: 8G+, Type: Linux swap, This is the virtual RAM
 
-Write the changes and quit
+Make sure to write the changes and quit
 
 # Format partitions
 #### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition
