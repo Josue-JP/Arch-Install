@@ -128,7 +128,7 @@ arch-chroot /mnt
 ```
 You've successfully entered into your OS!!
 # Set timezone & clock
-To see the available:
+To see the available timezones:
 ```bash
 ls /usr/share/zoneinfo
 ```
