@@ -248,7 +248,7 @@ Step 3 - Define the name's for each UUID
 
 Ex:
 
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet **cryptdevice=UUID=**4d8a927c-93b7-4bfa-a2b6-d9b497ff6a78 **:Croot** **root=UUID=**8fada6ed-545a-4021-9c21-c3c9b847593e"
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet cryptdevice=UUID=4d8a927c-93b7-4bfa-a2b6-d9b497ff6a78:Croot root=UUID=8fada6ed-545a-4021-9c21-c3c9b847593e"
 
 Notice how these were added 
 - cryptdevice=UUID=
