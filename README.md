@@ -295,11 +295,11 @@ If you can see the Grub menu at startup then that most likely means that you hav
 As you can see chooseing Arch Linux from the grub menu will prompt you with a password to login into the decrypted device, and later it will ask for a user login with a password.
 
 ### What to do after?
-First of all, props to you for making it this far but as you can see, Arch linux is basically a black void right now. What you need to do is to choose a way to display your files, applications, and programs.
+First of all, props to you for making it this, far but as you can see Arch linux is basically a black void right now. What you need to do now is to choose a way to display your files, applications, and programs.
 
 Below are documents I have written that handle the display and management of files, applications, and programs:
-- Hyprland
-- KDE plasma
+- Hyprland (In Progress)
+- KDE plasma (In Progress)
 
 For more information about window managers or desktop environments please refer to other trusted sources.
 
