@@ -292,7 +292,7 @@ After your computer shutsdown, you can now restart your pc/laptop.
 
 If you can see the Grub menu at startup then that most likely means that you have successfully installed Arch-Linux/GNU on your pc/laptop while dual booting!!
 
-As you can see chooseing Arch Linux from the grub menu will prompt you with a password to login into the decrypted device.
+As you can see chooseing Arch Linux from the grub menu will prompt you with a password to login into the decrypted device, and later it will ask for a user login with a password.
 
 ### What to do after?
 First of all, props to you for making it this far but as you can see, Arch linux is basically a black void right now. What you need to do is to choose a way to display your files, applications, and programs.
