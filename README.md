@@ -1,7 +1,8 @@
 # ARCH-INSTALL
 
 Download Arch on a UEFI machine with encryption while dual booting using this guide.
-You do need to do manual configuration as the arch installation is personal to your situation.
+
+This is a manual configuration guide as the arch installation should be personal to you.
 ### Excellent sources:
 - https://wiki.archlinux.org/title/Installation_guide
 - https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system
