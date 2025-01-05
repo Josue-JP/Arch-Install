@@ -49,14 +49,14 @@ cfdisk /dev/sdb
 Make sure to write the changes and quit
 
 # Format partitions
-#### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition
+#### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition.
 - EFI - For this partition type the following command:
 ```bash
 mkfs.fat -F32 /dev/sdb3
 ```
 - ROOT - For this partition the following must be done:
 
-Type and enter in a custom password for the encrypted partition
+Type and enter in a custom password for the encrypted partition.
 ```bash
 cryptsetup luksFormant /dev/sdb4
 ```
