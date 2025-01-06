@@ -25,7 +25,7 @@ for a more detailed understanding of the commands.
 - lsblk
 
 - cfdisk /dev/sdb
---------------------------
+
 Create:
 
 EFI -- 1G  Type: EFISystem 
