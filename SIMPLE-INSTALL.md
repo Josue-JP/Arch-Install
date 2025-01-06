@@ -188,8 +188,8 @@ What you need to do now is to choose a way to display your files, applications, 
 Below are documents that I have written or which are in progress, 
 that handle the display and management of files, applications, and programs:
 
-----Hyprland (In Progress)
-----KDE plasma (In Progress)
+-   Hyprland (In Progress)
+-   KDE plasma (In Progress)
 
 For more information about window managers or desktop environments please refer to other trusted sources.
 __________________________________________________________________________________________________________
