@@ -79,6 +79,7 @@ Optional:
 
 Check whether you have amd or intel: 
 - cat /proc/cpuinfo | grep -i 'vendor_id'
+
 OR
 - lscpu | grep Vendor
 
