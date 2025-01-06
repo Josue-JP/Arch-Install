@@ -258,7 +258,7 @@ Make sure that everything is in one line.
 Notice how these were added 
 - cryptdevice=UUID=
 - :Croot
-- root=UUID=.
+- root=UUID=
 
 Remember to save and exit out of nano by doing ctrl+o [enter] and ctrl+x
 
