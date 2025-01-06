@@ -10,7 +10,9 @@ This is a manual configuration guide as the arch installation should be personal
 - https://www.youtube.com/watch?v=kXqk91R4RwU
 - https://comfy.guide/client/luks/
 
-If you are going to use the sources listed instead of this tutorial, I encourage you to start with the arch wiki page, but if it is to much for you, then just refer to the two youtube videos(*yes both of them, as one is only for dual boothing without encryption, and the other video is without dual booting but with encryption*).
+If you are going to use the sources listed instead of this tutorial, I encourage you to start with the arch wiki page.
+But if it is to much for you, then just refer to the two youtube videos.
+(*yes both of them, as one is only for dual boothing without encryption, and the other video is without dual booting but with encryption*).
 # Intro
 Firstly, set your keylayout. If you have a us keylayout, just copy the following command 
 
@@ -236,7 +238,8 @@ Ex:
 
 8fada6ed-545a-4021-9c21-c3c9b847593e
 
-That is an example of what the two UUID's will look like at the bottom of your file. Remember that the top UUID is the encrypted device, and that the bottom one is the decrypted device 
+That is an example of what the two UUID's will look like at the bottom of your file. 
+Remember that the top UUID is the encrypted device, and that the bottom one is the decrypted device 
 
 Step 2 - copy the two UUID's to the top of the file, after the word "quiet", where it says "GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"" 
 
@@ -290,14 +293,17 @@ shutdown now
 After your computer shutsdown, you can now restart your pc/laptop.
 
 
-If you can see the Grub menu at startup then that most likely means that you have successfully installed Arch-Linux/GNU on your pc/laptop while dual booting!!
+If you can see the Grub menu at startup then that most likely means that
+you have successfully installed Arch-Linux/GNU on your pc/laptop while dual booting!!
 
 As you can see chooseing Arch Linux from the grub menu will prompt you with a password to login into the decrypted device, and later it will ask for a user login with a password.
 
 ### What to do after?
-First of all, props to you for making it this, far but as you can see Arch linux is basically a black void right now. What you need to do now is to choose a way to display your files, applications, and programs.
+First of all, props to you for making it this far,
+but as you can see Arch linux is basically a black void right now. 
+What you need to do now is to choose a way to display your files, applications, and programs.
 
-Below are documents I have written or that are in progress, that handle the display and management of files, applications, and programs:
+Below are documents that I have written or which are in progress, that handle the display and management of files, applications, and programs:
 - Hyprland (In Progress)
 - KDE plasma (In Progress)
 
