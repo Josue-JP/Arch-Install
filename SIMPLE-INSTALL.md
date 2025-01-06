@@ -62,12 +62,11 @@ SWAP:
 
 - vim /etc/pacman.conf
 
------------------------------------
-To see how many threads your pc has
+This is to see how many threads your pc has
 - nproc
 OR
 - grep -c processor /proc/cpuinfo
------------------------------------
+
 ### Packages To Install
 
 If you have an amd processor then change intel-ucode to amd-ucode:
