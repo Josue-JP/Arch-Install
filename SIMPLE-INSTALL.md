@@ -73,7 +73,7 @@ OR
 
 If you have an amd processor then change intel-ucode to amd-ucode:
 - pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode sudo
-- 
+  
 Optional:
 - pacstrap /mnt git neofetch vim 
 
