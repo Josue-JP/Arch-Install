@@ -65,6 +65,7 @@ SWAP:
 Uncomment ParallelDownloads
 
 This is to see how many threads your pc has
+
 - nproc
 OR
 - grep -c processor /proc/cpuinfo
@@ -72,6 +73,7 @@ OR
 ### Packages To Install
 
 If you have an amd processor then change intel-ucode to amd-ucode:
+
 - pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode sudo firewalld
   
 Optional:
@@ -79,7 +81,6 @@ Optional:
 
 Check whether you have amd or intel: 
 - cat /proc/cpuinfo | grep -i 'vendor_id'
-
 OR
 - lscpu | grep Vendor
 
