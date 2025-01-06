@@ -33,7 +33,6 @@ EFI -- 1G  Type: EFISystem
 ROOT - 30+ Type: EFISystem 
 
 SWAP - 8G+ Type: EFISystem 
--------------------------- 
 ### Formating
 ---------------------------------
 EFI: 
