@@ -72,7 +72,7 @@ OR
 ### Packages To Install
 
 If you have an amd processor then change intel-ucode to amd-ucode:
-- pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode sudo
+- pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode sudo firewalld
   
 Optional:
 - pacstrap /mnt git neofetch vim 
