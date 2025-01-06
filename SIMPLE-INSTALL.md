@@ -62,6 +62,8 @@ SWAP:
 
 - vim /etc/pacman.conf
 
+Uncomment ParallelDownloads
+
 This is to see how many threads your pc has
 - nproc
 OR
