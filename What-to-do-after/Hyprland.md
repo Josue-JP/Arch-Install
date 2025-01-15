@@ -36,8 +36,9 @@ You will also need to edit the /etc/mkinitcpio.conf file,
 and change the MODULES section and add the following
 
 BEFORE: MODULES = ()
+
 AFTER: MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
-------- 
+-------  
 Now create and edit /etc/modprobe.d/nvidia.conf and add this line
 
 options nvidia_drm modeset=1 fbdev=1
