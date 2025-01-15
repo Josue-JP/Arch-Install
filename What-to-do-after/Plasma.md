@@ -20,7 +20,7 @@ You can stop right here and continue without setting up autologin,
 but I am going to setup autologin inside of SDDM in order for there to be 
 only one one time where I in a password and not twice.
 
-
+### Step 2
 Make a configuration directory 
 ```bash
 sudo mkdir /etc/sddm.conf.d
