@@ -238,7 +238,8 @@ echo "Thank you for using this script"
 echo "Exiting and shutting down..."
 sleep 3
 exit
+EOF
 umount -lR /mnt
 shutdown now
-EOF
+
 
