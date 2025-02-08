@@ -1,183 +1,402 @@
-#!/bin/bash
-# Arch Linux Installation Script with Encryption & Dual Boot Support
+# ARCH-INSTALL
 
-# Load US keyboard layout
+Download Arch on a UEFI machine with encryption while dual booting using this guide.
+
+This is a manual configuration guide as the arch installation should be personal to you.
+
+Note: If you're already familiar with the process of installing Arch Linux, feel free to open the SIMPLE-INSTALL file.
+It focuses on providing a more concise version of the instructions, with fewer details, as suggested by the name.
+### Excellent sources:
+- https://wiki.archlinux.org/title/Installation_guide
+- https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system
+- https://www.youtube.com/watch?v=NxqU1G8hKWk
+- https://www.youtube.com/watch?v=kXqk91R4RwU
+- https://comfy.guide/client/luks/
+
+If you are going to use the sources listed instead of this tutorial, I encourage you to start with the arch wiki page.
+But if it is to much for you, then just refer to the two youtube videos.
+(*yes both of them, as one is only for dual boothing without encryption, and the other video is without dual booting but with encryption*).
+# Intro
+Firstly, set your keylayout. If you have a us keylayout, just copy the following command 
+
+(for more info https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration)
+
+bash
 loadkeys us
 
-# List block devices
+
+Next start to connect to wifi with the following command 
+
+(for more info: https://wiki.archlinux.org/title/Iwd)
+
+bash
+iwctl
+
+
+Confirm the connection by pinging any website, for ex: 
+
+bash
+ping google.com
+
+
+
+# Create partitions 
+Firstly, check all the disks on your pc/laptop, and choose the disk that you want to partition.
+
+bash
 lsblk
-sleep 3
 
-# Create partitions
-while true; do
-  echo "----------------------------------------"
-  echo "|  Create:                             |"
-  echo "|  EFI  -- 1G   Type: EFI System       |"
-  echo "|  ROOT - 30G+ Type: Linux Filesystem  |"
-  echo "|  SWAP -- 8G+  Type: Linux Swap       |"
-  echo "----------------------------------------"
-  echo "Press any key to continue..."
-  read -n 1 -s 
-  echo "Proceeding..."
 
-  echo "Enter the drive you want to write to (example: /dev/sda):"
-  read drive
+Then run the cfdisk command and the disk you will be partitioning.
 
-  echo "Confirm selection: '$drive' [y/n]"
-  read confirmation
+(make sure you put the /dev/ and then the disk)
 
-  case "$confirmation" in
-    [yY] | "" ) 
-      echo "Creating partitions on $drive..."
-      cfdisk "$drive"
-      break
-      ;;
-    [nN] )  
-      echo "You have chosen not to proceed."
-      ;;
-    * )  
-      echo "Choose a valid option [y/n]..."
-      ;;
-  esac
-done
+bash
+cfdisk /dev/sdb
 
-lsblk
-sleep 3
 
-while true; do
-  echo "Enter your Boot Partition (example: /dev/sda1):"
-  read bootPartition
-  echo "Enter your Root Partition (example: /dev/sda2):"
-  read rootPartition
-  echo "Enter your Swap Partition (example: /dev/sda3):"
-  read swapPartition
+*I will be partitioning "sdb" but for you it might be "mmcblk0", "sdX" or "nvme0n1"*
+### The Three partitions
+- EFI ----- Size: 1G, Type: EFISystem, This is the bootloader partition
+- ROOT - Size: 30G+, Type: Linux filesystem, This is the actual OS
+- SWAP - Size: 8G+, Type: Linux swap, This is the virtual RAM
 
-  echo "Are these correct?"
-  echo "Boot: $bootPartition | Root: $rootPartition | Swap: $swapPartition"
-  read -p "[y/n] " answer
+Make sure to write the changes and quit
 
-  case "$answer" in 
-    [yY] | "" ) 
-      echo "Formatting partitions..."
-      mkfs.fat -F32 "$bootPartition"
-      cryptsetup luksFormat "$rootPartition"
-      cryptsetup open "$rootPartition" Croot
-      mkfs.ext4 /dev/mapper/Croot
-      mkswap "$swapPartition"
-      break
-      ;;
-    [nN] )  
-      echo "Please retry."
-      ;;
-    * )  
-      echo "Choose a valid option [y/n]..."
-  esac 
-done
+# Format partitions
+#### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition.
+- EFI - For this partition type the following command:
 
-# Mount partitions
-echo "---------------------------------"
+bash
+mkfs.fat -F32 /dev/sdb3
+
+
+- ROOT - For this partition the following must be done:
+
+Type and enter in a custom password for the encrypted partition.
+
+bash
+cryptsetup luksFormant /dev/sdb4
+
+
+Create the decrypted partition inside of the encrypted partition.
+
+(you can change Croot to whatever you like (ex: cryptroot))
+
+bash
+cryptsetup open /dev/sdb4 Croot
+
+
+For the journaling-file-system ext4, run the following to format Croot:
+
+bash
+mkfs.ext4 /dev/mapper/Croot
+
+
+- SWAP - For this partition type the following command:
+
+bash
+mkswap /dev/sdb5
+
+
+# Mounting
+### Type the following:
+
+bash
 mount /dev/mapper/Croot /mnt
-mkdir -p /mnt/boot
-mount "$bootPartition" /mnt/boot
-swapon "$swapPartition"
 
-# Enable parallel downloads 
-echo "---------------------------------"
-numOfCores=$(nproc)
-echo "Number of Cores: $numOfCores"
-echo "How many parallel downloads would you like? (default: 5)"
-read -p "[Press Enter to use default]" N
 
-if [[ -z "$N" ]]; then
-  N=5
-fi
+*^Croot is the decrypted partition^*
 
-sed -i "s/#ParallelDownloads = 5/ParallelDownloads = $N/" /etc/pacman.conf
+bash
+mkdir /mnt/boot
 
-# Install base packages
-while true; do
-  echo "Checking CPU vendor..."
-  grep -i 'vendor_id' /proc/cpuinfo
-  echo "What is your CPU firmware based on?"
-  echo "[1] AMD  |  [2] INTEL"
-  read cpu_choice
 
-  case "$cpu_choice" in 
-    1 ) 
-      pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware amd-ucode sudo git neofetch vim
-      break
-      ;;
-    2 ) 
-      pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode sudo git neofetch vim
-      break
-      ;;
-    * )  
-      echo "Choose a valid option [1/2]..."
-      ;;
-  esac 
-done
+bash
+mount /dev/sdb3 /mnt/boot
+
+
+*^sdb3 is the bootloader partition^*
+
+bash
+swapon /dev/sdb5
+
+
+*^sdb5 is the swap partition^*
+# Edit package manager
+In order to get faster download speeds for your installation, type: 
+
+bash
+nano /etc/pacman.conf
+
+
+Uncomment #ParallelDownloads = 5 and make the number change according to the number of threads your pc has
+
+To see how many threads your pc has exit the editor by doing ctrl+x and type: 
+
+bash
+nproc
+
+
+or 
+
+bash
+grep -c processor /proc/cpuinfo
+
+
+After uncommenting ParallelDownloads and setting a number, remember to save and exit out of nano by doing ctrl+o [enter] and ctrl+x
+
+What enabling ParrallelDownloads does is it allows multiple downloads to occur at the same time
+# Packages to install 
+I would reccomend to install all of these, but if you are using an amd processor then change intel-ucode to amd-ucode
+
+bash
+pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode sudo
+
+
+Optional installs example:
+
+bash
+pacstrap /mnt git neofetch vim
+
 
 # Generate fstab file
-genfstab -U /mnt > /mnt/etc/fstab
 
-# Prompt for timezone & hostname before chroot
-echo "Enter your timezone (Example: America/New_York):"
-read timezone
-echo "Enter a hostname for this system:"
-read hostname
+bash
+genfstab -U  /mnt > /mnt/etc/fstab
 
-# Get UUIDs **before** entering chroot
-rootUUID=$(blkid -o value -s UUID "$rootPartition")
-cryptUUID=$(blkid -o value -s UUID /dev/mapper/Croot)
 
-# Enter Arch chroot
-arch-chroot /mnt /bin/bash <<EOF
-# Set timezone
-ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
+# Enter as root into arch
+
+bash
+arch-chroot /mnt
+
+
+You've successfully entered into your OS!!
+# Set timezone & clock
+To see the available timezones:
+
+bash
+ls /usr/share/zoneinfo
+
+
+To set a timezone 
+
+(Change /America/Los_Angeles to your timezone):
+
+bash
+ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+
+
+To set the hardware clock: 
+
+bash
 hwclock --systohc
 
-# Set locale
-sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+
+Do the following to confirm the date:
+
+bash
+date
+
+
+### Set the locale
+Uncomment your locale in this file:
+
+Ex:en_US.UTF-8 UTF-8
+
+bash
+nano /etc/locale.gen
+
+
+remember to save and exit out of nano by doing ctrl+o [enter] and ctrl+x, now type: 
+
+bash
 locale-gen
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
-# Set hostname
-echo "$hostname" > /etc/hostname
 
-# Set root password
-echo "Set a password for root:"
+To set your language, edit and type "LANG=en_US.UTF-8" in the following file: 
+
+bash
+nano /etc/locale.conf
+
+
+# Change Hostname 
+Edit and enter name for your hostname in the following file
+
+bash
+nano /etc/hostname
+
+
+*If you don't care about this just type Arch or skip this step*
+# Passwords
+### Root
+To change the password for Root, run this command and enter a password:
+
+bash
 passwd
 
-# Create daily user
-echo "Enter a username for daily use:"
-read user
-useradd -m -G wheel -s /bin/bash "\$user"
-echo "Set a password for \$user:"
-passwd "\$user"
 
-# Enable sudo for wheel group
-sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+### Custom users
+*A Custom user is a daily used user*
 
-# Configure initramfs
-sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems fsck)/' /etc/mkinitcpio.conf
+To allow the wheel group to have root privileges:
+
+bash
+EDITOR=nano visudo
+
+
+*^Uncomment "%wheel ALL=(ALL:ALL) ALL"^*
+
+Save & exit the file and type the following, with the last word being whatever you want the custom user's name to be: 
+
+bash
+useradd -m -G wheel -s /bin/bash User1
+
+
+Next add a password to that user:
+
+bash
+passwd User1
+
+
+# Configure initcpio & Grub
+### Initcpio 
+Edit this file by going to the HOOKS section and adding ecrypt & lvm2 after the word "block"
+
+bash
+nano /etc/mkinitcpio.conf
+
+
+After that save & exit the file and run this command: 
+
+bash
 mkinitcpio -P
 
-# Install GRUB
+
+### Grub with encrypted setup
+Install:
+
+bash
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
-# Automatically configure GRUB with encrypted partitions
-sed -i "s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet cryptdevice=UUID=$cryptUUID:Croot root=UUID=$rootUUID\"|" /etc/default/grub
 
+#### Encryption with Grub
+Run this command to see the UUID of your encrypted partition:
+
+bash
+blkid -o value -s UUID /dev/sdb4
+
+
+Now send the UUID of sdb4(encrypted) and Croot(decrypted) to grub 
+
+bash
+blkid -o value -s UUID /dev/sdb4 >> /etc/default/grub
+
+
+bash
+blkid -o value -s UUID /dev/mapper/Croot >> /etc/default/grub
+
+
+Notice that on the second command /dev/sdb4 was changed to /dev/mapper/Croot, change those paths to the your own devices names.
+
+Now type
+
+bash
+nano /etc/default/grub
+
+
+#### PLEASE PROCEED WITH CAUTION, AND BE SURE THAT WHAT YOU ARE DOING IS CORRECT 
+
+#### IF YOU ARE NOT SURE ON WHETHER YOU ARE DOING IT RIGHT, PLEASE LOOK UP THE ISSUE ON TRUSTED SOURCES
+#### FOR MORE DETAIL ABOUT THE NEXT PROCESS, REFER TO THE "GRUB Setup" SECTION OF THIS LINK (https://comfy.guide/client/luks/)
+
+Step 1 - In this file scroll down to the very bottom and look for the UUID of the encrypted and decrypted device
+
+Ex: 
+
+4d8a927c-93b7-4bfa-a2b6-d9b497ff6a78
+
+8fada6ed-545a-4021-9c21-c3c9b847593e
+
+That is an example of what the two UUID's will look like at the bottom of your file. 
+Remember that the top UUID is the encrypted device, and that the bottom one is the decrypted device 
+
+Step 2 - copy the two UUID's to the top of the file, after the word "quiet", where it says "GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"" 
+
+The line should now look something like this Ex:
+
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet 4d8a927c-93b7-4bfa-a2b6-d9b497ff6a78 8fada6ed-545a-4021-9c21-c3c9b847593e"
+
+Step 3 - Define the name's for each UUID
+
+Ex:
+
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet cryptdevice=UUID=4d8a927c-93b7-4bfa-a2b6-d9b497ff6a78:Croot root=UUID=8fada6ed-545a-4021-9c21-c3c9b847593e"
+
+Make sure that everything is in one line.
+
+Notice how these were added 
+- cryptdevice=UUID=
+- :Croot
+- root=UUID=
+
+Remember to save and exit out of nano by doing ctrl+o [enter] and ctrl+x
+
+Now you can run the following: 
+
+bash
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Enable services
-systemctl enable NetworkManager
+
+# On start programs
+Normally applications would not run at the start of powering on your pc/laptop, but when using "systemctl enable [The program you choose]" it them allows for that program to run at start
+
+Recommendation: 
+
+bash
+system enable NetworkManager
+
+
+bash
 systemctl enable bluetooth
 
-echo "Setup complete! Exiting chroot..."
-exit
-EOF
 
-# Unmount partitions and shut down
+Remember that Linux is case-sensitive
+# THE END 
+You can now exit with the following commands:
+
+bash
+exit
+
+
+bash
 umount -lR /mnt
+
+
+bash
 shutdown now
+
+
+##################################################################
+#### WHILE THE COMPUTER IS IN SHUTDOWN MODE UNPLUG THE USB STICK
+##################################################################
+
+After your computer shutsdown, you can now restart your pc/laptop.
+
+
+If you can see the Grub menu at startup then that most likely means that
+you have successfully installed Arch-Linux/GNU on your pc/laptop while dual booting!!
+
+As you can see chooseing Arch Linux from the grub menu will prompt you with a password to login into the decrypted device, and later it will ask for a user login with a password.
+
+### What to do after?
+First of all, props to you for making it this far,
+but as you can see Arch linux is basically a black void right now. 
+What you need to do now is to choose a way to display your files, applications, and programs.
+
+Below are documents that I have written or which are in progress, that handle the display and management of files, applications, and programs:
+- Hyprland (In Progress)
+- KDE plasma (In Progress)
+
+For more information about window managers or desktop environments please refer to other trusted sources.
