@@ -13,7 +13,7 @@ It focuses on providing a more concise version of the instructions, with fewer d
 - https://www.youtube.com/watch?v=kXqk91R4RwU
 - https://comfy.guide/client/luks/
 
-If you are going to use the sources listed instead of this tutorial, I encourage you to start with the arch wiki page.
+Above are some great sources to follow if you need to have more detailed information. If you are going to use the sources listed instead of this tutorial, I encourage you to start with the arch wiki page.
 But if it is to much for you, then just refer to the two youtube videos.
 (*yes both of them, as one is only for dual boothing without encryption, and the other video is without dual booting but with encryption*).
 # Intro
