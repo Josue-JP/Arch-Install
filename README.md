@@ -19,7 +19,7 @@ But if it is to much for you, then just refer to the two youtube videos.
 
 # Pre-Intro
 Firstly, go ahead and watch this video in order to shrink a partition in Windows.
-https://www.youtube.com/watch?v=wQQ-ohOdcZU
+
 I recommend shrinking the partition by about 40GB or 40960MB
 
 # Intro
