@@ -18,9 +18,10 @@ But if it is to much for you, then just refer to the two youtube videos.
 (*yes both of them, as one is only for dual boothing without encryption, and the other video is without dual booting but with encryption*).
 
 # Pre-Intro
-Firstly, go ahead and watch this video in order to shrink a partition in Windows.
-
-I recommend shrinking the partition by about 40GB or 40960MB
+Firstly, go ahead and watch this video between the times frames of 1:24-3:10, 
+this video shows how to shrink a partition and install the arch linux iso unto a usb using rufus.
+https://www.youtube.com/watch?v=NxqU1G8hKWk
+I recommend shrinking the partition by about 40GB or 40960MB or more
 
 # Intro
 Set your keylayout. If you have a us keylayout, just copy the following command 
