@@ -21,39 +21,39 @@ Firstly, set your keylayout. If you have a us keylayout, just copy the following
 
 (for more info https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration)
 
-bash
+```bash
 loadkeys us
-
+```
 
 Next start to connect to wifi with the following command 
 
 (for more info: https://wiki.archlinux.org/title/Iwd)
 
-bash
+```bash
 iwctl
-
+```
 
 Confirm the connection by pinging any website, for ex: 
 
-bash
+```bash
 ping google.com
-
+```
 
 
 # Create partitions 
 Firstly, check all the disks on your pc/laptop, and choose the disk that you want to partition.
 
-bash
+```bash
 lsblk
-
+```
 
 Then run the cfdisk command and the disk you will be partitioning.
 
 (make sure you put the /dev/ and then the disk)
 
-bash
+```bash
 cfdisk /dev/sdb
-
+```
 
 *I will be partitioning "sdb" but for you it might be "mmcblk0", "sdX" or "nvme0n1"*
 ### The Three partitions
@@ -67,82 +67,82 @@ Make sure to write the changes and quit
 #### For sdb3 sdb4 and sdb5 change them to whatever is your EFI, ROOT, and SWAP partition.
 - EFI - For this partition type the following command:
 
-bash
+```bash
 mkfs.fat -F32 /dev/sdb3
-
+```
 
 - ROOT - For this partition the following must be done:
 
 Type and enter in a custom password for the encrypted partition.
 
-bash
+```bash
 cryptsetup luksFormant /dev/sdb4
-
+```
 
 Create the decrypted partition inside of the encrypted partition.
 
 (you can change Croot to whatever you like (ex: cryptroot))
 
-bash
+```bash
 cryptsetup open /dev/sdb4 Croot
-
+```
 
 For the journaling-file-system ext4, run the following to format Croot:
 
-bash
+```bash
 mkfs.ext4 /dev/mapper/Croot
-
+```
 
 - SWAP - For this partition type the following command:
 
-bash
+```bash
 mkswap /dev/sdb5
-
+```
 
 # Mounting
 ### Type the following:
 
-bash
+```bash
 mount /dev/mapper/Croot /mnt
-
+```
 
 *^Croot is the decrypted partition^*
 
-bash
+```bash
 mkdir /mnt/boot
+```
 
-
-bash
+```bash
 mount /dev/sdb3 /mnt/boot
-
+```
 
 *^sdb3 is the bootloader partition^*
 
-bash
+```bash
 swapon /dev/sdb5
-
+```
 
 *^sdb5 is the swap partition^*
 # Edit package manager
 In order to get faster download speeds for your installation, type: 
 
-bash
+```bash
 nano /etc/pacman.conf
-
+```
 
 Uncomment #ParallelDownloads = 5 and make the number change according to the number of threads your pc has
 
 To see how many threads your pc has exit the editor by doing ctrl+x and type: 
 
-bash
+```bash
 nproc
-
+```
 
 or 
 
-bash
+```bash
 grep -c processor /proc/cpuinfo
-
+```
 
 After uncommenting ParallelDownloads and setting a number, remember to save and exit out of nano by doing ctrl+o [enter] and ctrl+x
 
@@ -150,161 +150,161 @@ What enabling ParrallelDownloads does is it allows multiple downloads to occur a
 # Packages to install 
 I would reccomend to install all of these, but if you are using an amd processor then change intel-ucode to amd-ucode
 
-bash
+```bash
 pacstrap /mnt base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode sudo
-
+```
 
 Optional installs example:
 
-bash
+```bash
 pacstrap /mnt git neofetch vim
-
+```
 
 # Generate fstab file
 
-bash
+```bash
 genfstab -U  /mnt > /mnt/etc/fstab
-
+```
 
 # Enter as root into arch
 
-bash
+```bash
 arch-chroot /mnt
-
+```
 
 You've successfully entered into your OS!!
 # Set timezone & clock
 To see the available timezones:
 
-bash
+```bash
 ls /usr/share/zoneinfo
-
+```
 
 To set a timezone 
 
 (Change /America/Los_Angeles to your timezone):
 
-bash
+```bash
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-
+```
 
 To set the hardware clock: 
 
-bash
+```bash
 hwclock --systohc
-
+```
 
 Do the following to confirm the date:
 
-bash
+```bash
 date
-
+```
 
 ### Set the locale
 Uncomment your locale in this file:
 
 Ex:en_US.UTF-8 UTF-8
 
-bash
+```bash
 nano /etc/locale.gen
-
+```
 
 remember to save and exit out of nano by doing ctrl+o [enter] and ctrl+x, now type: 
 
-bash
+```bash
 locale-gen
-
+```
 
 To set your language, edit and type "LANG=en_US.UTF-8" in the following file: 
 
-bash
+```bash
 nano /etc/locale.conf
-
+```
 
 # Change Hostname 
 Edit and enter name for your hostname in the following file
 
-bash
+```bash
 nano /etc/hostname
-
+```
 
 *If you don't care about this just type Arch or skip this step*
 # Passwords
 ### Root
 To change the password for Root, run this command and enter a password:
 
-bash
+```bash
 passwd
-
+```
 
 ### Custom users
 *A Custom user is a daily used user*
 
 To allow the wheel group to have root privileges:
 
-bash
+```bash
 EDITOR=nano visudo
-
+```
 
 *^Uncomment "%wheel ALL=(ALL:ALL) ALL"^*
 
 Save & exit the file and type the following, with the last word being whatever you want the custom user's name to be: 
 
-bash
+```bash
 useradd -m -G wheel -s /bin/bash User1
-
+```
 
 Next add a password to that user:
 
-bash
+```bash
 passwd User1
-
+```
 
 # Configure initcpio & Grub
 ### Initcpio 
 Edit this file by going to the HOOKS section and adding ecrypt & lvm2 after the word "block"
 
-bash
+```bash
 nano /etc/mkinitcpio.conf
-
+```
 
 After that save & exit the file and run this command: 
 
-bash
+```bash
 mkinitcpio -P
-
+```
 
 ### Grub with encrypted setup
 Install:
 
-bash
+```bash
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-
+```
 
 #### Encryption with Grub
 Run this command to see the UUID of your encrypted partition:
 
-bash
+```bash
 blkid -o value -s UUID /dev/sdb4
-
+```
 
 Now send the UUID of sdb4(encrypted) and Croot(decrypted) to grub 
 
-bash
+```bash
 blkid -o value -s UUID /dev/sdb4 >> /etc/default/grub
+```
 
-
-bash
+```bash
 blkid -o value -s UUID /dev/mapper/Croot >> /etc/default/grub
-
+```
 
 Notice that on the second command /dev/sdb4 was changed to /dev/mapper/Croot, change those paths to the your own devices names.
 
 Now type
 
-bash
+```bash
 nano /etc/default/grub
-
+```
 
 #### PLEASE PROCEED WITH CAUTION, AND BE SURE THAT WHAT YOU ARE DOING IS CORRECT 
 
@@ -345,38 +345,38 @@ Remember to save and exit out of nano by doing ctrl+o [enter] and ctrl+x
 
 Now you can run the following: 
 
-bash
+```bash
 grub-mkconfig -o /boot/grub/grub.cfg
-
+```
 
 # On start programs
 Normally applications would not run at the start of powering on your pc/laptop, but when using "systemctl enable [The program you choose]" it them allows for that program to run at start
 
 Recommendation: 
 
-bash
+```bash
 system enable NetworkManager
+```
 
-
-bash
+```bash
 systemctl enable bluetooth
-
+```
 
 Remember that Linux is case-sensitive
 # THE END 
 You can now exit with the following commands:
 
-bash
+```bash
 exit
+```
 
-
-bash
+```bash
 umount -lR /mnt
+```
 
-
-bash
+```bash
 shutdown now
-
+```
 
 ##################################################################
 #### WHILE THE COMPUTER IS IN SHUTDOWN MODE UNPLUG THE USB STICK
