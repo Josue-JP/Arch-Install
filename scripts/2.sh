@@ -2,9 +2,7 @@
 # Set timezone
 clear
 ls /usr/share/zoneinfo/America
-echo "Enter your timezone (Example: New_York):"
-read timezone
-ln -sf /usr/share/zoneinfo/America/$timezone /etc/localtime
+ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
 
 # Set locale
@@ -18,14 +16,14 @@ read hostname
 echo "$hostname" > /etc/hostname
 
 # Set root password
-echo "Set a password for root:"
+echo "This Password Will Be For Root:"
 passwd
 
 # Create daily user
 echo "Enter a username for daily use:"
 read user
 useradd -m -G wheel -s /bin/bash "$user"
-echo "Set a password for $user:"
+echo "This Password Will Be For The User $user:"
 passwd "$user"
 
 # Enable sudo for wheel group
@@ -56,7 +54,5 @@ systemctl enable NetworkManager
 echo "To Complete The Installation Please Execute These Commands"
 echo "exit"
 echo "reboot"
-
-
 
 
