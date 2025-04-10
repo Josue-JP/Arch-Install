@@ -1,5 +1,15 @@
 #!/bin/bash
 
+sudo pacman -Syu
+
+sudo pacman -S gnome --needed --noconfirm
+
+sudo systemctl enable gdm.service
+echo "Please reboot after entering the Gnome Environment"
+read -p "Press any key to continue"
+sudo systemctl start gdm.service
+
+# ENABLE AUTOLOGIN
 # Get your username
 USERNAME=$(whoami)
 
