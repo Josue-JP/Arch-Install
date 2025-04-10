@@ -9,6 +9,7 @@ packages=(
     btop
     htop
     git
+    chromium
 )
 
 # List all the packages to be installed
