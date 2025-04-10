@@ -1,5 +1,34 @@
 #!/bin/bash
 
+
+# Define the array of packages
+packages=(
+    ghostty
+    tmux
+    vim
+    btop
+    htop
+    git
+)
+
+# List all the packages to be installed
+echo "The following packages will be installed:"
+for pkg in "${packages[@]}"; do
+  echo "$pkg"
+done
+
+read -p "Press Any Key To Download These Packages" _
+
+# Install packages
+for pkg in "${packages[@]}"; do
+  echo "Installing $pkg..."
+  sudo pacman -S --needed --noconfirm "$pkg"
+done
+
+echo "Installation complete"
+
+
+
 ### === VIM CONFIGURATION === ###
 VIMRC="$HOME/.vimrc"
 VIM_PLUG_PATH="$HOME/.vim/autoload/plug.vim"
