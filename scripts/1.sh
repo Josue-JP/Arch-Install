@@ -1,12 +1,29 @@
 #!/bin/bash
 # Arch Linux Installation Script with Encryption & Dual Boot Support
 # This Script is free to use
-# In this script there will be made three partitions, a boot partition, an encrypted root partition where the OS will be installed, and a swap partition for virtual RAM. 
+# In this script there will be made three partitions, a boot partition, an encrypted root partition where the OS will be installed, and a swap partition for virtual RAM.
 # The reason as to why someone would like an encrypted arch setup is because if someone steals your usb, hard drive, or whatever your os is loaded to, they won't be able to see all the files because it's encrypted.
 
 # Load US keyboard layout
 loadkeys us
 
+# Make files executable
+files=(
+    1.sh
+    2.sh
+    3.sh
+    gnomeInstall.sh
+    setup.sh
+)
+
+for file in "${files[@]}"; do
+    if [[ -f "$file" ]]; then
+        chmod +x "$file"
+        echo "$file is now executable."
+    else
+        echo "$file does not exist."
+    fi
+done
 
 
 # Create partitions
@@ -22,7 +39,7 @@ while true; do
   echo "|  SWAP -- 8G+  Type: Linux Swap       |"
   echo "----------------------------------------"
   echo "Press any key to continue..."
-  read -n 1 -s 
+  read -n 1 -s
   echo "Proceeding..."
 
   echo "Enter the drive you want to write to (example: /dev/sda):"
@@ -32,15 +49,15 @@ while true; do
   read confirmation
 
   case "$confirmation" in
-    [yY] | "" ) 
+    [yY] | "" )
       echo "Creating partitions on $drive..."
       cfdisk "$drive"
       break
       ;;
-    [nN] )  
+    [nN] )
       echo "You have chosen not to proceed."
       ;;
-    * )  
+    * )
       echo "Choose a valid option [y/n]..."
       ;;
   esac
@@ -61,22 +78,24 @@ while true; do
   echo "Boot: $bootPartition | Root: $rootPartition | Swap: $swapPartition"
   read -p "[y/n] " answer
 
-  case "$answer" in 
-    [yY] | "" ) 
+  case "$answer" in
+    [yY] | "" )
       echo "Formatting partitions..."
       mkfs.fat -F32 "$bootPartition"
+      echo "This Will Serve As The Password To Enter Your Encrypted Device"
       cryptsetup luksFormat "$rootPartition"
+      echo "Enter The Password That You Just Made"
       cryptsetup open "$rootPartition" Croot
       mkfs.ext4 /dev/mapper/Croot
       mkswap "$swapPartition"
       break
       ;;
-    [nN] )  
+    [nN] )
       echo "Please retry."
       ;;
-    * )  
+    * )
       echo "Choose a valid option [y/n]..."
-  esac 
+  esac
 done
 
 # Mount partitions
@@ -86,7 +105,7 @@ mkdir /mnt/boot
 mount "$bootPartition" /mnt/boot
 swapon "$swapPartition"
 
-# Enable parallel downloads 
+# Enable parallel downloads
 echo "---------------------------------"
 numOfCores=$(nproc)
 echo "Number of Cores: $numOfCores"
@@ -101,7 +120,7 @@ sed -i "s/#ParallelDownloads = 5/ParallelDownloads = $N/" /etc/pacman.conf
 
 # Install base packages
 
-pacstrap /mnt --needed --noconfirm base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode git neofetch vim 
+pacstrap /mnt --needed --noconfirm base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware intel-ucode git neofetch vim
 break
 
 # Generate fstab file
@@ -117,13 +136,6 @@ echo "arch-chroot /mnt /bin/bash"
 echo ""
 echo "After Executing That Command Please Run The Second Script Which Is '2.sh'"
 echo ""
-
-
-
-
-
-
-
 
 
 
