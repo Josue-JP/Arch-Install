@@ -9,11 +9,7 @@ loadkeys us
 
 # Make files executable
 files=(
-    1.sh
     2.sh
-    3.sh
-    gnomeInstall.sh
-    setup.sh
 )
 
 for file in "${files[@]}"; do
@@ -63,6 +59,8 @@ while true; do
   esac
 done
 
+sleep 1
+
 while true; do
   clear
   lsblk
@@ -83,6 +81,12 @@ while true; do
       echo "Formatting partitions..."
       mkfs.fat -F32 "$bootPartition"
       echo "This Will Serve As The Password To Enter Your Encrypted Device"
+      until cryptsetup luksFormat "$rootPartition"; do
+        echo "luksFormat failed. Retrying..."
+        sleep 1  # If failed to create password it retry's 
+      done
+
+
       cryptsetup luksFormat "$rootPartition"
       echo "Enter The Password That You Just Made"
       cryptsetup open "$rootPartition" Croot
@@ -107,16 +111,8 @@ swapon "$swapPartition"
 
 # Enable parallel downloads
 echo "---------------------------------"
-numOfCores=$(nproc)
-echo "Number of Cores: $numOfCores"
-echo "How many parallel downloads would you like? (default: 5)"
-read -p "[Press Enter to use default]" N
 
-if [[ -z "$N" ]]; then
-  N=5
-fi
-
-sed -i "s/#ParallelDownloads = 5/ParallelDownloads = $N/" /etc/pacman.conf
+sed -i "s/#ParallelDownloads = 5/ParallelDownloads = 5/" /etc/pacman.conf
 
 # Install base packages
 
