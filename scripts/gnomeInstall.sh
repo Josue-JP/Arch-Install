@@ -28,7 +28,5 @@ else
     echo "setup.sh does not exist."
 fi
 
-echo "Please reboot after entering the Gnome Environment"
-read -p "Press any key to continue"
-sudo systemctl start gdm.service
-
+echo "Please reboot"
+sudo reboot
