@@ -117,7 +117,6 @@ files=(
     2.sh
     gnomeInstall.sh
     setup.sh
-    copy.sh
 )
 
 for file in "${files[@]}"; do
