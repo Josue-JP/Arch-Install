@@ -94,7 +94,6 @@ while true; do
       done
 
 
-      cryptsetup luksFormat "$rootPartition"
       echo "Enter The Password That You Just Made"
       cryptsetup open "$rootPartition" Croot
       mkfs.ext4 /dev/mapper/Croot
@@ -130,7 +129,7 @@ break
 genfstab -U /mnt > /mnt/etc/fstab
 
 # Send the 2nd file into /mnt
-cp 2.sh gnomeInstall.sh setup.sh /mnt
+cp 2.sh gnomeInstall.sh setup.sh copy.sh /mnt
 
 clear
 echo ""
