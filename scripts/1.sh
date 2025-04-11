@@ -7,23 +7,6 @@
 # Load US keyboard layout
 loadkeys us
 
-# Make files executable
-files=(
-    2.sh
-    gnomeInstall.sh
-    setup.sh
-)
-
-for file in "${files[@]}"; do
-    if [[ -f "$file" ]]; then
-        chmod +x "$file"
-        echo "$file is now executable."
-    else
-        echo "$file does not exist."
-    fi
-done
-
-
 # Create partitions
 while true; do
   clear
@@ -128,10 +111,24 @@ break
 # Generate fstab file
 genfstab -U /mnt > /mnt/etc/fstab
 
-# Send the 2nd file into /mnt
-cp 2.sh gnomeInstall.sh setup.sh copy.sh /mnt
-
 clear
+# Make files executable and send them to /mnt
+files=(
+    2.sh
+    gnomeInstall.sh
+    setup.sh
+    copy.sh
+)
+
+for file in "${files[@]}"; do
+    if [[ -f "$file" ]]; then
+        chmod +x "$file"
+        cp "$file" /mnt
+    else
+        echo "ERROR WITH FILE: $file"
+    fi
+done
+
 echo ""
 echo "To Complete The Installation Please Execute The Following Command:"
 echo "arch-chroot /mnt /bin/bash"
