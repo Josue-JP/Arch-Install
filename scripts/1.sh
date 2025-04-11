@@ -83,9 +83,14 @@ while true; do
       echo "Formatting partitions..."
       mkfs.fat -F32 "$bootPartition"
       echo "This Will Serve As The Password To Enter Your Encrypted Device"
-      until cryptsetup luksFormat "$rootPartition"; do
-        echo "luksFormat failed. Retrying..."
-        sleep 1  # If failed to create password it retry's 
+      while true; do
+        if cryptsetup luksFormat "$rootPartition"; then
+          echo "luksFormat succeeded."
+          break
+        else
+          echo "luksFormat failed. Retrying in 1 second..."
+          sleep 1
+        fi
       done
 
 
