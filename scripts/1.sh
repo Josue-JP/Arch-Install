@@ -10,6 +10,7 @@ loadkeys us
 # Make files executable
 files=(
     2.sh
+    gnomeInstall.sh
 )
 
 for file in "${files[@]}"; do
@@ -123,7 +124,7 @@ break
 genfstab -U /mnt > /mnt/etc/fstab
 
 # Send the 2nd file into /mnt
-cp 2.sh /mnt
+cp 2.sh gnomeInstall.sh /mnt
 
 clear
 echo ""
