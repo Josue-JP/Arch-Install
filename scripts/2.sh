@@ -68,7 +68,7 @@ read -p "Press Any Key to Continue"
 sudo vim /lib/systemd/system/getty\@.service
 
 sleep 1
-cp gnomeInstall.sh setup.sh ~
+./copy.sh
 sleep 1
 clear
 
