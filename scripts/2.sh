@@ -69,6 +69,8 @@ sudo vim /lib/systemd/system/getty\@.service
 
 sleep 1
 clear
+cp gnomeInstall.sh ~
+
 
 echo "To Complete The Installation Please Execute These Commands"
 echo "exit"
