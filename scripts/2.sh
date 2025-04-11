@@ -68,9 +68,9 @@ read -p "Press Any Key to Continue"
 sudo vim /lib/systemd/system/getty\@.service
 
 sleep 1
+cp gnomeInstall.sh setup.sh ~
+sleep 1
 clear
-cp gnomeInstall.sh ~
-
 
 echo "To Complete The Installation Please Execute These Commands"
 echo "exit"
