@@ -77,5 +77,5 @@ echo "To Complete The Installation Please Execute These Commands"
 echo "exit"
 echo "umount -lR /mnt"
 echo "shutdown"
-echo "NOTE: While the competer is shutdown, please eject the flash-drive from your Computer"
+echo "NOTE: While the competer is shutdown, please eject the flash-drive from your Computer. After ejecting the usb-stick, then turn your Computer back on"
 
