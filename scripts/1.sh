@@ -128,12 +128,9 @@ for file in "${files[@]}"; do
     fi
 done
 
-echo ""
-echo "To Complete The Installation Please Execute The Following Command:"
-echo "arch-chroot /mnt /bin/bash"
-echo ""
-echo "After Executing That Command Please Run The Second Script Which Is '2.sh'"
-echo ""
+
+arch-chroot /mnt /bin/bash
+./2.sh
 
 
 
