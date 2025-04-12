@@ -67,22 +67,15 @@ read -p "Press Any Key to Continue"
 # Open the file in Vim for editing
 sudo vim /lib/systemd/system/getty\@.service
 
-sleep 1
-clear
-read -p "To install Gnome as your Desktop Environment, press Enter." gnome
-if [[ -z "$gnome" ]]; then
-    ./gnomeInstall.sh
-else
-    echo "Installation canceled."
-fi
 
 
-if [ gnome 
+
 sleep 1
 clear
 
 echo "To Complete The Installation Please Execute These Commands"
 echo "exit"
-echo "reboot"
-
+echo "umount -lR /mnt"
+echo "shutdown"
+echo "NOTE: While the competer is shutdown, please eject the flash-drive from your Computer"
 
