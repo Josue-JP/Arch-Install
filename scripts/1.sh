@@ -128,9 +128,8 @@ for file in "${files[@]}"; do
     fi
 done
 
-
-arch-chroot /mnt /bin/bash
-./2.sh
+echo "To continue please execute the following command, and later execute the script 2.sh"
+echo "arch-chroot /mnt /bin/bash"
 
 
 
