@@ -78,4 +78,4 @@ echo "exit"
 echo "umount -lR /mnt"
 echo "shutdown"
 echo "NOTE: While the competer is shutdown, please eject the flash-drive from your Computer. After ejecting the usb-stick, then turn your Computer back on"
-
+echo "After ejecting the USB-stick you can turn on your computer and choose which desktop environment or window manager you want."
