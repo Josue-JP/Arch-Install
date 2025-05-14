@@ -105,7 +105,7 @@ sed -i "s/#ParallelDownloads = 5/ParallelDownloads = 5/" /etc/pacman.conf
 
 # Install base packages
 clear
-pacstrap /mnt --needed --noconfirm base base-devel networkmanager lvm2 cryptsetup grub efibootmgr linux linux-firmware git neofetch vim
+pacstrap /mnt --needed --noconfirm base base-devel networkmanager lvm2 cryptsetup grub os-prober efibootmgr linux linux-firmware git neofetch vim
 
 
 # Generate fstab file
