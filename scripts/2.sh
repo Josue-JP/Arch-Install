@@ -52,7 +52,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable NetworkManager
 
 # Get the current username
-USERNAME=$(whoami)
+read -p "Enter The User To Automatically Login: " USERNAME
 ESCAPED_USERNAME=$(printf '%s\n' "$USERNAME" | sed 's/[\/&]/\\&/g')
 
 # Enable auto-login into the current user
@@ -68,6 +68,6 @@ clear
 echo "To Complete The Installation Please Execute These Commands"
 echo "exit"
 echo "umount -lR /mnt"
-echo "shutdown"
+echo "shutdown now"
 echo "NOTE: While the competer is shutdown, please eject the flash-drive from your Computer. After ejecting the usb-stick, then turn your Computer back on"
-echo "After ejecting the USB-stick you can turn on your computer and choose which desktop environment or window manager you want."
+echo "After ejecting the USB-stick and turning on your computer, you can now choose which desktop environment or window manager you want."
