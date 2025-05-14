@@ -61,6 +61,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable NetworkManager
 
 # Get the current username
+echo ""
 read -p "Enter The User To Automatically Login: " USERNAME
 ESCAPED_USERNAME=$(printf '%s\n' "$USERNAME" | sed 's/[\/&]/\\&/g')
 
