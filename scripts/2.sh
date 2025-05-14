@@ -45,6 +45,15 @@ echo ""
 rootUUID=$(blkid -o value -s UUID "$rootPartition")
 cryptUUID=$(blkid -o value -s UUID /dev/mapper/Croot)
 sed -i "s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet cryptdevice=UUID=$rootUUID:Croot root=UUID=$cryptUUID\"|" /etc/default/grub
+if grep -q "^\s*#\?\s*GRUB_DISABLE_OS_PROBER=" /etc/default/grub; then
+    # Uncomment and replace the line
+    sed -i 's|^\s*#\?\s*GRUB_DISABLE_OS_PROBER=.*|GRUB_DISABLE_OS_PROBER=false|' /etc/default/grub
+else
+    # Append it if not found
+    echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
+fi
+
+
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
