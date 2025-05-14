@@ -18,7 +18,7 @@ for pkg in "${packages[@]}"; do
   echo "$pkg"
 done
 
-read -p "Press Any Key To Download These Packages" _
+read -p "Press Enter To Download These Packages" _
 
 # Install packages
 for pkg in "${packages[@]}"; do
