@@ -53,9 +53,9 @@ else
     echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 fi
 
+sleep 1
 
-
-grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Enable services
 systemctl enable NetworkManager
