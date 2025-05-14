@@ -7,6 +7,7 @@ sudo pacman -S gnome --needed --noconfirm
 sudo systemctl enable gdm.service
 # ENABLE AUTOLOGIN
 # Get your username
+echo ""
 read -p "Enter The User To Automatically Login Into The Gnome Environment: " USERNAME
 ESCAPED_USERNAME=$(printf '%s\n' "$USERNAME" | sed 's/[\/&]/\\&/g')
 
