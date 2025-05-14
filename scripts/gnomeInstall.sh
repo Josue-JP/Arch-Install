@@ -15,6 +15,11 @@ ESCAPED_USERNAME=$(printf '%s\n' "$USERNAME" | sed 's/[\/&]/\\&/g')
 sudo sed -i "/^\[daemon\]/a AutomaticLoginEnable=True\nAutomaticLogin=$ESCAPED_USERNAME" /etc/gdm/custom.conf
 
 echo "Added automatic login for user: $ESCAPED_USERNAME"
+
+sleep 1
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sleep 1
+
 if [ -f setup.sh ]; then
     # setup.sh exists
     if [ -x setup.sh ]; then
