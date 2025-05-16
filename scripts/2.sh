@@ -76,8 +76,10 @@ sleep 1
 clear
 
 echo "To Complete The Installation Please Execute These Commands"
-echo "exit"
-echo "umount -lR /mnt"
-echo "shutdown now"
+ecoh ""
+echo "- exit"
+echo "- umount -lR /mnt"
+echo "- shutdown now"
+echo ""
 echo "NOTE: While the competer is shutdown, please eject the flash-drive from your Computer. After ejecting the usb-stick, then turn your Computer back on"
 echo "After ejecting the USB-stick and turning on your computer, you can now choose which desktop environment or window manager you want."
