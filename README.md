@@ -1,5 +1,7 @@
 # ARCH-INSTALL
 
+**NOTE: If you do not want step by step install Arch-linux, just use the scripts provided in the scripts directory to semi-automate the process.**
+
 Download Arch on a UEFI machine with encryption while dual booting using this guide.
 
 This is a manual configuration guide as the arch installation should be personal to you.
