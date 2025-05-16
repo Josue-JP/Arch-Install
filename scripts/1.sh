@@ -10,7 +10,10 @@ loadkeys us
 clear
 echo ""
 echo "NOTE: There will be some packages and settings automatically inserted into your arch install, but if you do not feel safe with downloading certain packages such as linux-firmware, please edit this and the otehr scripts as needed.
+echo "Press any key to continue..."
+read -n 1 -s
 clear
+
 
 # Create partitions
 while true; do
