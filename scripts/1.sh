@@ -130,6 +130,8 @@ done
 
 echo "To continue please execute the following command, and later execute the script 2.sh"
 echo "arch-chroot /mnt /bin/bash"
+echo ""
+echo ""
 
 
 
