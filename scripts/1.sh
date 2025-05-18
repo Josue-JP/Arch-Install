@@ -113,7 +113,41 @@ sed -i "s/#ParallelDownloads = 5/ParallelDownloads = 5/" /etc/pacman.conf
 
 # Install base packages
 clear
-pacstrap /mnt --needed --noconfirm base base-devel networkmanager lvm2 cryptsetup grub os-prober efibootmgr linux linux-firmware git neofetch vim
+
+packages=(
+    base
+    base-devel
+    networkmanager
+    lvm2
+    cryptsetup
+    grub
+    os-prober
+    efibootmgr
+    linux
+    linux-firmware
+    git
+    neofetch
+    vim
+)
+
+# List all the packages to be installed
+echo "The following packages will be installed:"
+for pkg in "${packages[@]}"; do
+  echo "$pkg"
+done
+
+read -p "Press Enter To Download These Packages" _
+
+# Install packages
+for pkg in "${packages[@]}"; do
+  echo "Installing $pkg..."
+  pacstrap /mnt --needed --noconfirm "$pkg"
+done
+
+echo "Installation complete"
+
+
+
 
 
 # Generate fstab file
