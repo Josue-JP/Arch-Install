@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 
 # Define the array of packages
 packages=(
@@ -9,7 +10,6 @@ packages=(
     btop
     htop
     git
-    chromium
 )
 
 # List all the packages to be installed
@@ -17,6 +17,10 @@ echo "The following packages will be installed:"
 for pkg in "${packages[@]}"; do
   echo "$pkg"
 done
+echo "yay"
+echo "Brave-Browswer"
+
+
 
 read -p "Press Enter To Download These Packages" _
 
@@ -25,6 +29,17 @@ for pkg in "${packages[@]}"; do
   echo "Installing $pkg..."
   sudo pacman -S --needed --noconfirm "$pkg"
 done
+
+sudo pacman -S --noconfirm --needed base-devel git
+
+cd /tmp
+git clone https://aur.archlinux.org/yay.git
+cd yay
+
+makepkg -si --noconfirm
+
+echo "Installing Brave Browser (brave-bin)..."
+yay -S --noconfirm brave-bin
 
 echo "Installation complete"
 
