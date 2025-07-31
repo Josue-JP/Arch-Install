@@ -1,6 +1,29 @@
 #!/bin/bash
 
+NOCONFIRM=false
+
+if [[ "$1" == "--noconfirm" ]]; then
+    NOCONFIRM=true
+fi
+
 set -e
+
+echo "!!!DISCLAIMER!!!"
+echo "BEFORE CONTINUING BE AWARE THAT THIS SCRIPT IS MEANT TO ONLY BE RAN ON A BRAND NEW SYSTEM, NOT ON A SYSTEM THAT ALREADY HAS CONFIG FILES"
+echo "PLEASE DO NOT RUN THIS SCRIPT MORE THAN ONCE"
+
+if ! $NOCONFIRM; then
+    read -p "Enter 'UNDERSTAND' if you understand what this means" userInput
+
+    if [[ "$userInput" != "UNDERSTAND" ]]; then
+        echo "ABORTING SCRIPT"
+        echo "You must type 'UNDERSTAND' to proceed"
+        exit 1
+    fi
+
+fi
+
+
 
 # Define the array of packages
 packages=(
@@ -10,6 +33,7 @@ packages=(
     btop
     htop
     git
+    python3
 )
 
 # List all the packages to be installed
@@ -18,7 +42,7 @@ for pkg in "${packages[@]}"; do
   echo "$pkg"
 done
 echo "yay"
-echo "Brave-Browswer"
+echo "Brave-Browser"
 
 
 
@@ -44,60 +68,34 @@ yay -S --noconfirm brave-bin
 echo "Installation complete"
 
 
+echo "CREATING/APPENDING TO ~/.vimrc, ~/.bashrc, and ~/.tmux.conf"
 
-### === VIM CONFIGURATION === ###
+DUMP_REPO="https://github.com/Josue-JP/Dump"
+git clone $DUMP_REPO
+
+cd Dump/home
+
+bashrc=$(python3 script.py bashrc)
+vimrc=$(python3 script.py vimrc)
+tmuxconf=$(python3 script.py tmux.conf)
+
+cd -
+
+rm -rf Dump
+
+# Variables
 VIMRC="$HOME/.vimrc"
 VIM_PLUG_PATH="$HOME/.vim/autoload/plug.vim"
-
-VIM_SETTINGS=$(cat << 'EOF'
-"""""""""""
-" vim-plug
-"""""""""""
-" To vim-plug:
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-" https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"
-" To install plugins:
-" :PlugInstall
-"""""""""""
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-" Initialize vim-plug
-call plug#begin('~/.vim/plugged')
-
-" Plugins
-Plug 'easymotion/vim-easymotion'
-
-" End vim-plug setup
-call plug#end()
+TMUX_CONF="$HOME/.tmux.conf"
+BASH_RC="$HOME/.bashrc"
 
 
-" Built-in Plugins
-syntax enable
-set smartindent
-set autoindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set scrolloff=7
 
-" Key-binds
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-let mapleader = " "
-inoremap <C-BS> <C-W>
-nnoremap diw diwx
-nmap <leader>f <Plug>(easymotion-bd-w)
-nnoremap ;di diwi
-nnoremap ;n :bn<CR>
+# Use the variables
+printf '%s\n' "$bashrc" >> $BASH_RC
+printf '%s\n' "$vimrc" >> $VIMRC
+printf '%s\n' "$tmuxconf" >> $TMUX_CONF
 
-
-" Snippets
-noremap ,cb :-1read ~/snippets/codeBubble.md<CR>ji
-EOF
-)
 
 # Install vim-plug if needed
 if [ ! -f "$VIM_PLUG_PATH" ]; then
@@ -105,44 +103,10 @@ if [ ! -f "$VIM_PLUG_PATH" ]; then
   curl -fLo "$VIM_PLUG_PATH" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
     echo "vim-plug installed!"
-else
-  echo "vim-plug already installed."
 fi
 
-# Append Vim settings if not already present
-if ! grep -q "Plug 'easymotion/vim-easymotion'" "$VIMRC"; then
-  echo "$VIM_SETTINGS" >> "$VIMRC"
-  echo "Appended Vim settings to $VIMRC"
-else
-  echo "Vim settings already in $VIMRC"
-fi
 
 # Install Vim plugins
 echo "Installing Vim plugins..."
 vim +PlugInstall +qall
-
-
-### === TMUX CONFIGURATION === ###
-TMUX_CONF="$HOME/.tmux.conf"
-
-TMUX_SETTINGS=$(cat << 'EOF'
-unbind r
-bind r source-file ~/.tmux.conf
-
-set-option -g mode-keys vi
-
-set -g prefix C-s
-
-set -g status-style fg=white,bg=default
-set -g status-position top
-EOF
-)
-
-# Append TMUX settings if not already present
-if ! grep -q "set -g prefix C-s" "$TMUX_CONF"; then
-  echo "$TMUX_SETTINGS" >> "$TMUX_CONF"
-  echo "Appended tmux settings to $TMUX_CONF"
-else
-  echo "Tmux settings already in $TMUX_CONF"
-fi
 
