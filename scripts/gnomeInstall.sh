@@ -25,12 +25,12 @@ if [ -f setup.sh ]; then
     # setup.sh exists
     if [ -x setup.sh ]; then
         echo "setup.sh is executable. Running..."
-        ./setup.sh
+        ./setup.sh --noconfirm
     else
         echo "setup.sh is not executable. Making it executable..."
         chmod +x setup.sh
         echo "Running setup.sh..."
-        ./setup.sh
+        ./setup.sh --noconfirm
     fi
 else
     echo "setup.sh does not exist."
