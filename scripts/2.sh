@@ -20,11 +20,12 @@ echo "This Password Will Be For Root:"
 passwd
 
 # Create daily user
-echo "Enter a username for daily use:"
-read user
-useradd -m -G wheel -s /bin/bash "$user"
-echo "This Password Will Be For The User $user:"
-passwd "$user"
+read -p "Enter a username for daily use:" user
+ESCAPED_USERNAME=$(printf '%s\n' "$user" | sed 's/[\/&]/\\&/g')
+
+useradd -m -G wheel -s /bin/bash "$ESCAPED_USERNAME"
+echo "This Password Will Be For The User $ESCAPED_USERNAME:"
+passwd "$ESCAPED_USERNAME"
 
 # Enable sudo for wheel group
 sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
@@ -38,10 +39,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
 # Automatically configure GRUB with encrypted partitions
 clear
-lsblk
-read -p "Please Re-Enter Your Root Partition/Encrypted Partition. Example: /dev/sdb2
-" rootPartition
-echo ""
+
 rootUUID=$(blkid -o value -s UUID "$rootPartition")
 cryptUUID=$(blkid -o value -s UUID /dev/mapper/Croot)
 sed -i "s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet cryptdevice=UUID=$rootUUID:Croot root=UUID=$cryptUUID\"|" /etc/default/grub
@@ -62,12 +60,27 @@ systemctl enable NetworkManager
 
 # Get the current username
 echo ""
-read -p "Enter The User To Automatically Login: " USERNAME
-ESCAPED_USERNAME=$(printf '%s\n' "$USERNAME" | sed 's/[\/&]/\\&/g')
 
 # Enable auto-login into the current user
 sudo sed -i "s|^ExecStart=-/sbin/agetty .*|ExecStart=-/sbin/agetty -a $ESCAPED_USERNAME --noreset --noclear - \${TERM}|" /lib/systemd/system/getty@.service
 
+sleep 1
+
+# This sends variables into gnomeInstall.sh
+VAR_NAME="ROOT_PARTITION"
+VAR_NAME1="ESCAPED_USERNAME"
+TARGET="gnomeInstall.sh"
+
+
+# Insert the variable assignment after the shebang line
+{
+  head -n 1 "$TARGET" # Print first line (shebang)
+
+  echo "$VAR_NAME=\"$rootPartition\"" # Print the variables
+  echo "$VAR_NAME1=\"$ESCAPED_USERNAME\""
+
+  tail -n +2 "$TARGET" # Print the rest of the file starting from line 2
+} > temp_file && mv temp_file "$TARGET"
 
 
 
