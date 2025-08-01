@@ -58,12 +58,9 @@ while true; do
   clear
   lsblk
   sleep 3
-  echo "Enter your Boot Partition (example: /dev/sda1):"
-  read bootPartition
-  echo "Enter your Root Partition (example: /dev/sda2):"
-  read rootPartition
-  echo "Enter your Swap Partition (example: /dev/sda3):"
-  read swapPartition
+  read -p "Enter your Boot Partition (example: /dev/sda1):" bootPartition
+  read -p "Enter your Root Partition (example: /dev/sda2):" rootPartition
+  read -p "Enter your Swap Partition (example: /dev/sda3):" swapPartition
 
   echo "Are these correct?"
   echo "Boot: $bootPartition | Root: $rootPartition | Swap: $swapPartition"
@@ -154,6 +151,27 @@ echo "Installation complete"
 genfstab -U /mnt > /mnt/etc/fstab
 
 clear
+
+
+# This sends variables into 2.sh
+VAR_NAME="ROOT_PARTITION"
+TARGET="2.sh"
+
+
+# Insert the variable assignment after the shebang line
+{
+  # Print first line (shebang)
+  head -n 1 "$TARGET"
+  # Print the variable assignment
+  echo "$VAR_NAME=\"$rootPartition\""
+  # Print the rest of the file starting from line 2
+  tail -n +2 "$TARGET"
+} > temp_file && mv temp_file "$TARGET"
+
+
+
+
+
 # Make files executable and send them to /mnt
 files=(
     2.sh
@@ -174,6 +192,3 @@ echo "To continue please execute the following command, and later execute the sc
 echo "arch-chroot /mnt /bin/bash"
 echo ""
 echo ""
-
-
-
