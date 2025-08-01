@@ -6,11 +6,7 @@ sudo pacman -S gnome --needed --noconfirm
 
 sudo systemctl enable gdm.service
 # ENABLE AUTOLOGIN
-# Get your username
 clear
-echo ""
-read -p "Enter The User To Automatically Login Into The Gnome Environment: " USERNAME
-ESCAPED_USERNAME=$(printf '%s\n' "$USERNAME" | sed 's/[\/&]/\\&/g')
 
 # Use sudo to insert the lines after [daemon]
 sudo sed -i "/^\[daemon\]/a AutomaticLoginEnable=True\nAutomaticLogin=$ESCAPED_USERNAME" /etc/gdm/custom.conf
