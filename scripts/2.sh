@@ -26,6 +26,8 @@ useradd -m -G wheel -s /bin/bash "$user"
 echo "This Password Will Be For The User $user:"
 passwd "$user"
 
+sleep 1
+
 # Enable sudo for wheel group
 sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
@@ -77,6 +79,7 @@ TARGET="gnomeInstall.sh"
   tail -n +2 "$TARGET" # Print the rest of the file starting from line 2
 } > temp_file && mv temp_file "$TARGET"
 
+chmod +x "$TARGET"
 
 
 
