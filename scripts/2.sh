@@ -21,11 +21,10 @@ passwd
 
 # Create daily user
 read -p "Enter a username for daily use:" user
-ESCAPED_USERNAME=$(printf '%s\n' "$user" | sed 's/[\/&]/\\&/g')
 
-useradd -m -G wheel -s /bin/bash "$ESCAPED_USERNAME"
-echo "This Password Will Be For The User $ESCAPED_USERNAME:"
-passwd "$ESCAPED_USERNAME"
+useradd -m -G wheel -s /bin/bash "$user"
+echo "This Password Will Be For The User $user:"
+passwd "$user"
 
 # Enable sudo for wheel group
 sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
@@ -60,6 +59,7 @@ systemctl enable NetworkManager
 
 # Get the current username
 echo ""
+ESCAPED_USERNAME=$(printf '%s\n' "$user" | sed 's/[\/&]/\\&/g')
 
 # Enable auto-login into the current user
 sudo sed -i "s|^ExecStart=-/sbin/agetty .*|ExecStart=-/sbin/agetty -a $ESCAPED_USERNAME --noreset --noclear - \${TERM}|" /lib/systemd/system/getty@.service
