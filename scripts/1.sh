@@ -154,7 +154,7 @@ clear
 
 
 # This sends variables into 2.sh
-VAR_NAME="ROOT_PARTITION"
+VAR_NAME="rootPartition"
 TARGET="2.sh"
 
 
