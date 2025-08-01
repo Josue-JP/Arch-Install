@@ -67,18 +67,13 @@ sudo sed -i "s|^ExecStart=-/sbin/agetty .*|ExecStart=-/sbin/agetty -a $ESCAPED_U
 sleep 1
 
 # This sends variables into gnomeInstall.sh
-VAR_NAME="ROOT_PARTITION"
 VAR_NAME1="ESCAPED_USERNAME"
 TARGET="gnomeInstall.sh"
-
 
 # Insert the variable assignment after the shebang line
 {
   head -n 1 "$TARGET" # Print first line (shebang)
-
-  echo "$VAR_NAME=\"$rootPartition\"" # Print the variables
-  echo "$VAR_NAME1=\"$ESCAPED_USERNAME\""
-
+  echo "$VAR_NAME1=\"$ESCAPED_USERNAME\""   # Print the variables
   tail -n +2 "$TARGET" # Print the rest of the file starting from line 2
 } > temp_file && mv temp_file "$TARGET"
 
