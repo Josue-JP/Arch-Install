@@ -38,53 +38,47 @@ This guide walks you through installing Arch Linux using custom scripts from a U
    cd Arch-Install/scripts
    ```
 
-6. **Make Script Executable**
-   Grant executable permissions to the first script:
-   ```bash
-   chmod +x 1.sh
-   ```
-
-7. **Run the First Script**
+6. **Run the First Script**
    Execute the first script and follow its prompts:
    ```bash
    ./1.sh
    ```
 
-8. **Enter Chroot Environment**
+7. **Enter Chroot Environment**
    After the first script completes, enter the chroot environment:
    ```bash
    arch-chroot /mnt /bin/bash
    ```
 
-9. **Run the Second Script**
+8. **Run the Second Script**
    Execute the second script and follow its instructions:
    ```bash
    ./2.sh
    ```
 
-10. **Reboot and Log In**
+9. **Reboot and Log In**
     After the second script finishes, reboot your system. Log in using the password set during the first script.
 
-11. **Connect to Wi-Fi Post-Install**
+10. **Connect to Wi-Fi Post-Install**
     Use `nmcli` to connect to Wi-Fi. Replace `YourSSID` with your network name:
     ```bash
     nmcli --ask device wifi connect "YourSSID"
     ```
     For details, see the [Arch Wiki: NetworkManager](https://wiki.archlinux.org/title/NetworkManager).
 
-12. **Navigate to Root Directory**
+11. **Navigate to Root Directory**
     Move to the root directory:
     ```bash
     cd /
     ```
 
-13. **Install GNOME Environment**
+12. **Install GNOME Environment**
     Run the GNOME installation script:
     ```bash
     ./gnomeInstall.sh
     ```
 
-14. **Customize Packages (Optional)**
+13. **Customize Packages (Optional)**
     The `gnomeInstall.sh` script downloads default packages. To install different packages, edit the `setup.sh` file before running the script.
 
 ## Notes
