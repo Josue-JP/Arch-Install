@@ -56,6 +56,7 @@ done
 
 sudo pacman -S --noconfirm --needed base-devel git
 
+echo "Installing yay!"
 cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -64,6 +65,10 @@ makepkg -si --noconfirm
 
 echo "Installing Brave Browser (brave-bin)..."
 yay -S --noconfirm brave-bin
+
+echo "Installing zoxide"
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
 
 echo "Installation complete"
 
