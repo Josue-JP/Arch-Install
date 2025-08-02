@@ -63,9 +63,11 @@ cd yay
 
 makepkg -si --noconfirm
 
+sleep 1
 echo "Installing Brave Browser (brave-bin)..."
 yay -S --noconfirm brave-bin
 
+sleep 1
 echo "Installing zoxide"
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 

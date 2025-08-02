@@ -176,6 +176,7 @@ TARGET="2.sh"
 files=(
     2.sh
     setup.sh
+    gnomeInstall.sh
 )
 
 for file in "${files[@]}"; do
