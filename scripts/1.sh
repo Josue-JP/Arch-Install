@@ -175,7 +175,6 @@ TARGET="2.sh"
 # Make files executable and send them to /mnt
 files=(
     2.sh
-    gnomeInstall.sh
     setup.sh
 )
 
