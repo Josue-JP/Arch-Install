@@ -49,6 +49,7 @@ This guide walks you through installing Arch Linux using custom scripts from a U
    ```bash
    arch-chroot /mnt /bin/bash
    ```
+-------
 
 8. **Run the Second Script**
    Execute the second script and follow its instructions:
