@@ -57,8 +57,11 @@ This guide walks you through installing Arch Linux using custom scripts from a U
    ./2.sh
    ```
 
+
 9. **Reboot and Log In**
     After the second script finishes, reboot your system. Log in using the password set during the first script.
+
+-------
 
 10. **Connect to Wi-Fi Post-Install**
     Use `nmcli` to connect to Wi-Fi. Replace `YourSSID` with your network name:
