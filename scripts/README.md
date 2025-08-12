@@ -68,7 +68,7 @@ This guide walks you through installing Arch Linux using custom scripts from a U
     ```bash
     nmcli --ask device wifi connect "YourSSID"
     ```
-    For details, see the [Arch Wiki: NetworkManager](https://wiki.archlinux.org/title/NetworkManager).
+    For details, see the [Arch Wiki: NetworkManager](https://wiki.archlinux.org/title/NetworkManager). Alternatively you can use the `nmtui` tool as well.
 
 11. **Navigate to Root Directory**
     Move to the root directory:
