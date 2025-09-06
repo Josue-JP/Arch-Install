@@ -5,6 +5,8 @@ ls /usr/share/zoneinfo/America
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 timedatectl set-ntp true
 hwclock --systohc
+# timedatectl
+# ^^ This is to check the time and to check if NTP is running
 
 # Set locale
 sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
