@@ -3,6 +3,7 @@
 clear
 ls /usr/share/zoneinfo/America
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+timedatectl set-ntp true
 hwclock --systohc
 
 # Set locale
