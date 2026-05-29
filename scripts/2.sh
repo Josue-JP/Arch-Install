@@ -1,4 +1,4 @@
-#!/bin/bash
+g#!/bin/bash
 # Set timezone
 clear
 ls /usr/share/zoneinfo/America
@@ -90,7 +90,7 @@ sleep 1
 clear
 
 echo "To Complete The Installation Please Execute These Commands"
-ecoh ""
+echo ""
 echo "- exit"
 echo "- umount -lR /mnt"
 echo "- shutdown now"
