@@ -35,7 +35,7 @@ sleep 1
 sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 # Configure initramfs
-sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems fsck)/' /etc/mkinitcpio.conf
+sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)/' /etc/mkinitcpio.conf
 mkinitcpio -P
 
 # Install GRUB
@@ -44,9 +44,11 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 # Automatically configure GRUB with encrypted partitions
 clear
 
+sleep 5
+
 rootUUID=$(blkid -o value -s UUID "$rootPartition")
-cryptUUID=$(blkid -o value -s UUID /dev/mapper/Croot)
-sed -i "s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet cryptdevice=UUID=$rootUUID:Croot root=UUID=$cryptUUID\"|" /etc/default/grub
+sed -i "s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet cryptdevice=UUID=$rootUUID:Croot root=/dev/mapper/Croot\"|" /etc/default/grub
+
 if grep -q "^\s*#\?\s*GRUB_DISABLE_OS_PROBER=" /etc/default/grub; then
     # Uncomment and replace the line
     sed -i 's|^\s*#\?\s*GRUB_DISABLE_OS_PROBER=.*|GRUB_DISABLE_OS_PROBER=false|' /etc/default/grub
