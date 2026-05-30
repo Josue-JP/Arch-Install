@@ -1,4 +1,4 @@
-g#!/bin/bash
+#!/bin/bash
 # Set timezone
 clear
 ls /usr/share/zoneinfo/America
